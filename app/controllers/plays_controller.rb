@@ -1,5 +1,11 @@
 class PlaysController < ApplicationController
+  before_action :find_play, only: %i[show edit update destroy]
+
   def index
+    @plays = Play.all.order('created_at DESC')
+  end
+
+  def show
   end
 
   def new
@@ -10,7 +16,7 @@ class PlaysController < ApplicationController
     @play = Play.new(play_params)
 
     if @play.save
-      redirec_to root_path
+      redirect_to root_path
     else
       render 'new'
     end
@@ -20,5 +26,9 @@ class PlaysController < ApplicationController
 
   def play_params
     params.require(:play).permit(:title, :description, :director)
+  end
+
+  def find_play
+    @play = Play.find(params[:id])
   end
 end
