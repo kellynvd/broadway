@@ -1,5 +1,6 @@
 class PlaysController < ApplicationController
   before_action :find_play, only: %i[show edit update destroy]
+  before_action :correct_user, only: %i[edit update destroy]
 
   def index
     @plays = Play.all.order('created_at DESC')
@@ -46,5 +47,10 @@ class PlaysController < ApplicationController
 
   def find_play
     @play = Play.find(params[:id])
+  end
+
+  def correct_user
+    flash[:notice] = 'Access denied as you are not owner of this Pic'
+    redirect_to @play if current_user != @play.user
   end
 end
