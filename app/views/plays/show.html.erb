@@ -8,6 +8,13 @@
       <h2 class="play-title"><%= @play.title %></h2>
       <h3 class="play-director"><span>From </span><%= @play.director %></h3>
       <h4 class="play-director"><%= @play.category.name %></h4>
+      <h4 class="avg-rating"> Avarege Rating</h4>
+        <div class="avg-review-rating">
+          <% @average_review.times do %>
+            <span class="glyphicon glyphicon-star"></span>
+          <% end %>
+        </div>
+        <span class="number of review"><em>From: </em><%= @play.reviews.count %> reviews</span>
       <p class="play-desc"><%= @play.description %></p>
     </div>
   </div>

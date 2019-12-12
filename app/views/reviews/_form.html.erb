@@ -1,4 +1,11 @@
 <%= simple_form_for ([@play, @play.reviews.build]) do |f| %>
+  <div id="errors">
+     <ul>
+      <% @review.errors.full_messages.each do |msg| %>
+        <li> <%= msg %> </li>
+      <% end %>
+    </ul>
+  <div>
   <div id="rating-form">
     <%= f.input :rating %>
   </div>

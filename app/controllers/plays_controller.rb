@@ -12,6 +12,11 @@ class PlaysController < ApplicationController
   end
 
   def show
+    if @play.reviews.blank?
+      @average_review = 0
+    else
+      @average_review = @play.reviews.average(:rating).round
+    end
   end
 
   def new
@@ -52,7 +57,8 @@ class PlaysController < ApplicationController
   private
 
   def play_params
-    params.require(:play).permit(:title, :description, :director, :category_id, :play_img)
+    params.require(:play).permit(:title, :description, :director,
+                                 :category_id, :play_img)
   end
 
   def find_play
